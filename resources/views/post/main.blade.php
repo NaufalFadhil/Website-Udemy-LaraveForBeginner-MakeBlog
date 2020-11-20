@@ -1,7 +1,7 @@
 @extends('admin.main')
 
 @section('content')
-<h1 class="mt-4">Category Page</h1>
+<h1 class="mt-4">All Post</h1>
 <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
     <li class="breadcrumb-item active">Static Navigation</li>
@@ -11,16 +11,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">View All Category</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="category/create">Create New Category</a>
+                <a class="nav-link" href="/post/create">Create New Post</a>
             </li>
         </ul>
     </div>
 </nav>
 
-    @if(Session::has('category_update'))
+{{--    @if(Session::has('category_update'))
         <div class="alert alert-success"><em>{!! session('category_update') !!}</em>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times</span></button>
         </div>
@@ -59,6 +56,6 @@
             </tbody>
         </table>
     </div>
-@endif
+@endif --}}
 
 @endsection
