@@ -17,34 +17,65 @@
     </div>
 </nav>
 
-{{--    @if(Session::has('category_update'))
-        <div class="alert alert-success"><em>{!! session('category_update') !!}</em>
+    @if(Session::has('post_create'))
+    <div class="alert alert-success"><em>{!! session('post_create') !!}</em>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times</span></button>
+    </div>
+    @endif
+
+    @if(Session::has('post_update'))
+        <div class="alert alert-success"><em>{!! session('post_update') !!}</em>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times</span></button>
         </div>
     @endif
 
-@if(count($categories) > 0)
+    @if(Session::has('post_delete'))
+    <div class="alert alert-success"><em>{!! session('post_delete') !!}</em>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times</span></button>
+    </div>
+    @endif
+
+    @if(count($posts) > 0)
     <div class="panel panel-default">
-        All Categories
+        All Posts
     </div>
 
     <div class="panel-body">
         <table class="table table-striped task-table">
             <thead>
+                <th>Title</th>
+                <th>Author</th>
                 <th>Category</th>
+                <th>Image</th>
+                <th>Description</th>
                 <th>&nbsp;</th>
             </thead>
 
             <tbody>
-                @foreach ($categories as $category)
+                @foreach ($posts as $post)
                 <tr>
                     <td>
-                        <div>{!! $category->name !!}</div>
+                        <div>{!! $post->title !!}</div>
+                    </td>
+                    <td>
+                        <div>{!! $post->author !!}</div>
+                    </td>
+                    <td>
+                        <div>{!! $post->category_id !!}</div>
+                    </td>
+                    <td>
+                        <div>{!! Html::image("/img/posts/".$post->image, $post->title, array('width'=>'60')) !!}</div>
+                    </td>
+                    <td>
+                        <div>{!! $post->short_desc !!}</div>
+                    </td>
+                    <td>
+                        <div>{!! $post->name !!}</div>
                     </td>
 
-                    <td><a href="{!! url('category/' . $category->id . '/edit') !!}" class="btn btn-success">Edit</a></td>
+                    <td><a href="{!! url('post/' . $post->id . '/edit') !!}" class="btn btn-success">Edit</a></td>
                     <td>
-                        {!! Form::open(array('url'=>'category/' . $category->id , 'method'=>'DELETE')) !!}
+                        {!! Form::open(array('url'=>'post/' . $post->id , 'method'=>'DELETE')) !!}
                         {!! csrf_field() !!}
                         {!! method_field('DELETE') !!}
                             <button class="btn btn-danger">Delete</button>
@@ -56,6 +87,6 @@
             </tbody>
         </table>
     </div>
-@endif --}}
+@endif
 
 @endsection

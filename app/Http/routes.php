@@ -11,12 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('admin.index');
+Route::get('/view', function () {
+    // return view('admin.index');
+    // return view('store.main');
+    return view('store.view');
 });
 
+
+Route::get('/', 'StoreController@index');
+
+Route::controller('store', 'StoreController');
 Route::resource('category', 'CategoryController');
 Route::resource('post', 'PostController');
+Route::resource('user', 'UserController');
 
 
 // Route::group(['middleware' => ['web']], function () {
@@ -25,3 +32,7 @@ Route::resource('post', 'PostController');
 
 
 // category->controller->index->category.index.blade.php;
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

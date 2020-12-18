@@ -11,6 +11,13 @@ use App\Http\Requests;
 
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin');
+    }
+
     public function index()
     {
         $categories = category::all();
@@ -72,8 +79,8 @@ class CategoryController extends Controller
         $category->name = $request->input('name');
         $category->save();
 
-        Session::flash('category_update', 'Category is Update');
-        $request->session()->flash('category_update', 'Category is Update!');
+        Session::flash('category_update', 'Category is Updated');
+        // $request->session()->flash('category_update', 'Category is Update!');
 
         return redirect('category');
     }
@@ -83,6 +90,8 @@ class CategoryController extends Controller
         $categories = Category::find($id);
 
         $categories->delete();
+
+        Session::flash('category_delete', 'Category is Deleted');
 
         return redirect('category');
     }
